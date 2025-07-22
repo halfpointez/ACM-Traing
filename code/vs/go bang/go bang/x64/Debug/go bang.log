@@ -1,0 +1,4 @@
+﻿  Main.cpp
+D:\develop\project\code\vs\go bang\Main.cpp(48,4): warning C4102: “defalut”: 未引用的标签
+D:\develop\project\code\vs\go bang\Main.cpp(136,2): warning C4551: 缺少参数列表的函数调用
+  go bang.vcxproj -> D:\develop\project\code\vs\go bang\x64\Debug\go bang.exe

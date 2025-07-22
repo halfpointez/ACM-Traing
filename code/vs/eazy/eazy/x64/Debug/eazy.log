@@ -1,0 +1,7 @@
+﻿  Main.cpp
+D:\develop\project\code\vs\eazy\Main.cpp(13,9): warning C4005: “max”: 宏重定义
+      D:\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(193,9):
+      参见“max”的前一个定义
+  
+D:\develop\project\code\vs\eazy\Main.cpp(327,4): warning C4102: “defalut”: 未引用的标签
+  eazy.vcxproj -> D:\develop\project\code\vs\eazy\x64\Debug\eazy.exe
