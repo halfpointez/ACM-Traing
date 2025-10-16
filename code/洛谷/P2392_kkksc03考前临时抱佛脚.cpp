@@ -22,7 +22,7 @@ int main() {
       cin >> i;
     }
 
-    while (D.)
+    while (D.rbegin()!=0)
     {
         
     }

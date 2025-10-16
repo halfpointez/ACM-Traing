@@ -75,3 +75,5 @@ int* p = new int(10);
 delete p;   // 释放内存
 p = nullptr; // 置为空，避免成为悬空指针
 ```
+
+vector 提供了 back() 方法，直接返回最后一个元素的引用，简洁高效：
