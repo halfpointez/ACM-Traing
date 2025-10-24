@@ -77,3 +77,97 @@ p = nullptr; // 置为空，避免成为悬空指针
 ```
 
 vector 提供了 back() 方法，直接返回最后一个元素的引用，简洁高效：
+
+
+
+
+```cpp
+#include <iostream>
+using namespace std;
+
+// 1. 全局区（数据段/BSS段）：存放全局变量、静态全局变量
+int global_var = 10; // 全局变量（已初始化，存放在数据段）
+int global_uninit;   // 全局变量（未初始化，存放在BSS段）
+static int static_global = 20; // 静态全局变量（已初始化，数据段）
+
+
+// 3. 代码区：存放函数的二进制指令（所有函数的实现都在这里）
+void test_func(int param) { // param是函数参数，存放在栈区
+    // 2. 全局区：静态局部变量（虽在函数内，但属于全局区）
+    static int static_local = 30; // 静态局部变量（数据段）
+    
+    // 4. 栈区：局部变量（函数内定义的非静态变量）
+    int local_var = 40; // 局部变量（栈区）
+    
+    // 打印各变量地址，辅助观察（地址值仅作参考，不代表绝对规律）
+    cout << "test_func内：" << endl;
+    cout << "  函数参数param（栈区）：" << &param << endl;
+    cout << "  静态局部变量static_local（全局区）：" << &static_local << endl;
+    cout << "  局部变量local_var（栈区）：" << &local_var << endl;
+}
+
+
+int main() {
+    // 2. 全局区：字符串常量（存放在全局区的只读数据段）
+    const char* str_const = "hello world"; // 字符串常量本身在全局区，指针str_const在栈区
+    
+    // 4. 栈区：main函数的局部变量和参数
+    int main_local = 50; // 局部变量（栈区）
+    
+    // 5. 堆区：动态分配的内存（通过new/malloc分配）
+    int* heap_ptr = new int(60); // 动态分配的int（堆区），指针heap_ptr在栈区
+    
+    // 打印各部分地址，观察内存分布规律
+    cout << "全局区：" << endl;
+    cout << "  全局变量global_var（数据段）：" << &global_var << endl;
+    cout << "  未初始化全局变量global_uninit（BSS段）：" << &global_uninit << endl;
+    cout << "  静态全局变量static_global（数据段）：" << &static_global << endl;
+    cout << "  字符串常量\"hello world\"（全局区只读段）：" << (void*)str_const << endl; // 注意强转void*
+    
+    cout << "\n栈区：" << endl;
+    cout << "  main函数局部变量main_local（栈区）：" << &main_local << endl;
+    cout << "  指向堆的指针heap_ptr（栈区，本身是局部变量）：" << &heap_ptr << endl;
+    
+    cout << "\n堆区：" << endl;
+    cout << "  new分配的int（堆区）：" << heap_ptr << endl;
+    
+    cout << "\n调用test_func观察其内部变量：" << endl;
+    test_func(100); // 实参100会被复制到形参param（栈区）
+    
+    // 释放堆区内存（必须手动释放，否则内存泄漏）
+    delete heap_ptr;
+    return 0;
+}
+```
+
+
+### 各区域对应代码部分说明：
+1. **代码区**  
+   所有函数的实现（二进制指令）都存放在这里，包括`main`函数、`test_func`函数，以及`cout`等库函数的底层实现。代码中无法直接打印代码区的地址，但函数的调用逻辑依赖于代码区的指令。
+
+
+2. **全局区**  
+   代码中以下部分存放在全局区：  
+   - 全局变量：`global_var`（已初始化，数据段）、`global_uninit`（未初始化，BSS段）。  
+   - 静态全局变量：`static_global`（静态变量无论是否在函数外，都属于全局区）。  
+   - 静态局部变量：`test_func`内的`static_local`（虽在函数内，但生命周期与程序一致，存放在全局区）。  
+   - 字符串常量：`"hello world"`（存放在全局区的只读数据段，不可修改）。  
+
+
+3. **栈区**  
+   代码中以下部分存放在栈区：  
+   - 函数参数：`test_func`的`param`（函数调用时分配，调用结束释放）。  
+   - 局部变量（非静态）：`test_func`内的`local_var`、`main`内的`main_local`，以及指针`heap_ptr`（指针本身是局部变量，存放在栈区，指向堆区数据）。  
+
+
+4. **堆区**  
+   代码中通过`new`动态分配的内存存放在堆区：`new int(60)`分配的int类型数据，地址由`heap_ptr`指向。堆区内存必须通过`delete`手动释放（否则会导致内存泄漏）。
+
+
+### 运行观察建议：
+编译运行后，会打印各部分的内存地址。观察地址值可发现：  
+- 全局区变量的地址通常较为接近（且低于堆区和栈区）。  
+- 栈区变量的地址通常较高（且堆区地址一般低于栈区，因堆向上增长、栈向下增长）。  
+- 堆区地址与栈区地址有明显差距（中间隔有空闲内存）。  
+
+通过地址分布可直观感受内存四区的布局差异。
