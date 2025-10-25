@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+string s;
+void swap(char &a,char &b){
+    char temp = a;
+    a=b;
+    b=temp;
+}
+int main(){
+    int n;
+    int ord=0;
+    cin>>n;
+    for(int i=0;i<n;i++){
+        s+='o';
+    }
+    for(int i=0;i<n;i++){
+        s+='*';
+    }
+    s+="--";
+    for(auto i:s){
+        cout<<i;
+    }
+    cout<<endl;
+    int counter=n;
+    while (counter-->4){
+        swap(s[n-1-ord],s[2*n+2-1-1-ord]);
+        swap(s[n-ord],s[2*n+2-1-ord]);
+        for(auto i:s){
+            cout<<i;
+        }
+        cout<<endl;
+        swap(s[n-1-ord],s[2*n+2-1-1-2-ord]);
+        swap(s[n-ord],s[2*n+2-2-ord-1]);
+        for(auto i:s){
+            cout<<i;
+        }
+        cout<<endl;
+        ord++;
+    }
+    
+
+
+
+}
