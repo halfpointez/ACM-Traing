@@ -8,7 +8,7 @@ void swap(char &a,char &b){
 }
 int main(){
     int n;
-    int ord=0;
+    int ord_l=0,ord_r=0;
     cin>>n;
     for(int i=0;i<n;i++){
         s+='o';
@@ -23,19 +23,20 @@ int main(){
     cout<<endl;
     int counter=n;
     while (counter-->4){
-        swap(s[n-1-ord],s[2*n+2-1-1-ord]);
-        swap(s[n-ord],s[2*n+2-1-ord]);
+        swap(s[n-1-ord_l],s[2*n+2-1-1-ord_r]);
+        swap(s[n-ord_l],s[2*n+2-1-ord_r]);
         for(auto i:s){
             cout<<i;
         }
         cout<<endl;
-        swap(s[n-1-ord],s[2*n+2-1-1-2-ord]);
-        swap(s[n-ord],s[2*n+2-2-ord-1]);
+        swap(s[n-1-ord_l],s[2*n+2-1-1-2-ord_r]);
+        swap(s[n-ord_l],s[2*n+2-2-1-ord_r]);
         for(auto i:s){
             cout<<i;
         }
         cout<<endl;
-        ord++;
+        ord_l++;
+        ord_r+=2;
     }
     
 
