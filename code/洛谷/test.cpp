@@ -1,43 +1,53 @@
 #include <bits/stdc++.h>
-#define ll long long
 using namespace std;
-bool cmp(ll a, ll b) { return a < b; }
-int main() {
-  ll n;
-  ll ans = 0;
-  cin >> n;
-  vector<vector<ll>> apple(15);
+vector<int> random_arry(int n, int min_num, int max_num) {
+  vector<int> arr(n);
   for (int i = 0; i < n; i++) {
-    ll temp;
-    cin >> temp;
-    apple[0].push_back(temp);
+    arr[i] = min_num + rand() % (max_num - min_num + 1);
   }
-  ll len = apple[0].size();
-  ll counter = 0;
-  if(len==1){
-    cout<<0;
-  }
-  else{
-    while (len != 1) {
-      sort(apple[counter].begin(), apple[counter].end(), cmp);
-      if (len % 2 == 0) {
-        for (ll i = 0; i <= len - 2; i += 2) {
-          apple[counter + 1].push_back(apple[counter][i] +
-                                       apple[counter][i + 1]);
-          ans += (apple[counter][i] + apple[counter][i + 1]);
-        }
-      } else {
-        for (ll i = 0; i <= len - 3; i += 2) {
-          apple[counter + 1].push_back(apple[counter][i] +
-                                       apple[counter][i + 1]);
-          ans += (apple[counter][i] + apple[counter][i + 1]);
-        }
-        apple[counter + 1].push_back(apple[counter].back());
-      }
-      len = apple[counter + 1].size();
-      counter++;
+  return arr;
+}
+int binary_search(vector<int> arr, int need_find) {
+  int l = 0, r = arr.size() - 1, m;
+  while (l <= r) {
+    m = l + r / 2;
+    if(arr[m]==need_find){
+      return m;
     }
-    cout << ans;
+    if(arr[m]>need_find){
+      r=m-1;
+    }
+    else if(arr[m]<need_find){
+      l=m+1;
+    }
   }
-  
+  return -1;
+}
+
+int binary_search_huger(vector<int> arr, int need_find) {
+  int l = 0, r = arr.size() - 1, m,ans=-1;
+  while (l <= r) {
+    m = l + ((r-l)>>1);
+    if (arr[m] <= need_find) {
+      ans=m;
+      l=m+1;
+    }
+    else  {
+      r =  m - 1;
+    } 
+  }
+  return ans;
+}
+
+int main() {
+  srand(time(0));
+  vector<int> a(10);
+  for (auto &i : a) {
+    cin>>i;
+  }
+  sort(a.begin(), a.end());
+  for(auto i:a){
+    cout<<i<<' ';
+  }
+  cout<<binary_search_huger(a,4);
 }

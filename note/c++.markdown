@@ -219,3 +219,22 @@ int main() {
 - 用 `int stack[10]` 实现一个数据结构的栈，其存储在内存的“栈”中（局部变量）。  
 - 用 `new int[10]` 实现一个数据结构的栈，其存储在内存的“堆”中（动态分配）。  
 - 无论存储在哪里，这个结构的“后进先出”特性（数据结构的栈）不变。
+
+#一个简单的随记器数组写法
+#include<bits/stdc++.h>
+using namespace std;
+vector<int> random_arry(int n,int min_num,int max_num){
+  srand(time(0));
+  vector<int> arr(n);
+  for(int i=0;i<n;i++){
+    arr[i]=min_num+rand()%(max_num-min_num+1);
+  }
+  return arr;
+}
+int main(){
+  for(auto i:random_arry(10,0,10)){
+    cout<<i<<' ';
+  }
+}
+
+
