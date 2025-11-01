@@ -1,43 +1,22 @@
-#include <bits/stdc++.h>
-#define ll long long
+#include<bits/stdc++.h>
 using namespace std;
-bool cmp(ll a, ll b) { return a < b; }
-int main() {
-  ll n;
-  ll ans = 0;
-  cin >> n;
-  vector<vector<ll>> apple(15);
-  for (int i = 0; i < n; i++) {
-    ll temp;
-    cin >> temp;
-    apple[0].push_back(temp);
+int main(){
+  int a;
+  cin>>a;
+  vector<int> arr(a);
+  for(auto &i:arr){
+    cin>>i;
   }
-  ll len = apple[0].size();
-  ll counter = 0;
-  if(len==1){
-    cout<<0;
-  }
-  else{
-    while (len != 1) {
-      sort(apple[counter].begin(), apple[counter].end(), cmp);
-      if (len % 2 == 0) {
-        for (ll i = 0; i <= len - 2; i += 2) {
-          apple[counter + 1].push_back(apple[counter][i] +
-                                       apple[counter][i + 1]);
-          ans += (apple[counter][i] + apple[counter][i + 1]);
-        }
-      } else {
-        for (ll i = 0; i <= len - 3; i += 2) {
-          apple[counter + 1].push_back(apple[counter][i] +
-                                       apple[counter][i + 1]);
-          ans += (apple[counter][i] + apple[counter][i + 1]);
-        }
-        apple[counter + 1].push_back(apple[counter].back());
+  for(int i=1;i<a;i++){
+    for(int j=i-1;j>=0&&arr[j]>=arr[j+1];j--){
+      if(arr[j]>arr[i]){
+        swap(arr[i],arr[j]);
+        break;
       }
-      len = apple[counter + 1].size();
-      counter++;
     }
-    cout << ans;
   }
-  
+
+  for(auto i:arr){
+    cout<<i;
+  }
 }
