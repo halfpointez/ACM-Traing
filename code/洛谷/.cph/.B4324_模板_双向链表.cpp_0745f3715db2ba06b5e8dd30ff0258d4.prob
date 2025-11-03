@@ -1,0 +1,1 @@
+{"name":"Local: B4324_模板_双向链表","url":"/Applications/development/ACM-Traing/code/洛谷/B4324_模板_双向链表.cpp","tests":[{"id":1762133431984,"input":"10 7\n1 2 3\n2 4 5\n3 2\n1 9 4\n2 7 8\n3 4\n3 10","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Applications/development/ACM-Traing/code/洛谷/B4324_模板_双向链表.cpp","group":"local","local":true}
