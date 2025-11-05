@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+/* #include <bits/stdc++.h>
 #define ll long long
 using namespace std;
 bool cmp(ll a, ll b) { return a < b; }
@@ -28,4 +28,42 @@ int main() {
     cout << ans;
   }
   
+} */
+#include <bits/stdc++.h>
+using namespace std;
+using i64 = long long;
+bool cmp(i64 a, i64 b) { return a > b; }
+int main() {  
+  int n,ans=0;
+  cin>>n;
+  vector <i64> apple(n);
+  for(auto &i:apple) {
+    cin>>i;
+  }
+
+  sort(apple.begin(),apple.end(),cmp);
+
+  while (apple.size()-2) {
+    int i=apple.size()-1;
+    int sum=0;
+      if(apple[i]>apple[i-1]) {
+        swap(apple[i],apple[i-1]);
+        }
+        if(apple[i-1]>apple[i-2]) {
+          swap(apple[i-1],apple[i-2]);
+      }
+      if(apple[i]>apple[i-1]) {
+        swap(apple[i],apple[i-1]);
+        }
+
+      sum=apple[i]+apple[i-1];
+        ans+=sum;
+        apple.pop_back();
+        apple.pop_back();
+        apple.push_back(sum);
+
+  }
+    ans+=(apple[0]+apple[1]);
+
+    cout<<ans;
 }
