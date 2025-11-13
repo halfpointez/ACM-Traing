@@ -1,27 +1,10 @@
-#include<bits/stdc++.h>
+#include <iostream>
 using namespace std;
-class Example {
-public:
-    Example() {
-
-    }
-    
-    static int A;
-    int B;
-    
-    Example &add(const Example &e) {
-        this->B+=e.B;
-        return *this;
-    }
-    ~Example() {
-
-    }
-};
-int Example::A=100;
+const double PI = 3.14;
 int main() {
-    Example e1,e2;
-    e1.B=10;
-    e2.B=10;
-    e1.add(e2).add(e2).add(e2);
-    cout<<e1.B;
+  double r, ans;
+  cin >> r;
+  ans = (double)PI * r;
+  cout << ans;
 }
+// 64 位输出请用 printf("%lld")
