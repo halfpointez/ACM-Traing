@@ -1,0 +1,19 @@
+# Compiled binaries
+*.exe
+
+# CPH (Competitive Programming Helper) cache
+.cph-ng/
+.cph/
+*.bin
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Large ebooks (uncomment if you want to track them with Git LFS)
+# 摸鱼/*.pdf
+# 摸鱼/*.epub
