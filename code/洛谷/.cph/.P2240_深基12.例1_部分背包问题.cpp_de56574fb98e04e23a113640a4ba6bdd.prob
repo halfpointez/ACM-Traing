@@ -1,1 +1,0 @@
-{"name":"Local: P2240_深基12","url":"/Applications/development/ACM-Traing/code/洛谷/P2240_深基12.例1_部分背包问题.cpp","tests":[{"id":1761549177176,"input":"4 50\n10 60\n20 100\n30 120\n15 45\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Applications/development/ACM-Traing/code/洛谷/P2240_深基12.例1_部分背包问题.cpp","group":"local","local":true}
